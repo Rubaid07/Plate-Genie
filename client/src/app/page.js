@@ -1,3 +1,5 @@
+// src/app/page.js
+
 "use client";
 
 import { useState } from 'react';
@@ -9,7 +11,7 @@ export default function Home() {
   const [recipes, setRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); 
+  const [isLoggedIn, setIsLoggedIn] = useState(true); 
 
   const generateRecipes = async (ingredients) => {
     setIsLoading(true);
@@ -47,10 +49,10 @@ export default function Home() {
             <Items onGenerate={generateRecipes} />
           </div>
           <div className="md:w-2/3">
-            {isLoading && <p className="text-center text-lg">Generating recipes...</p>}
-            {error && <p className="text-center text-red-500 text-lg">Error: {error}</p>}
+            {isLoading && <p className="text-center text-lg text-foreground">Generating recipes...</p>} {/* text-foreground */}
+            {error && <p className="text-center text-red-500 text-lg text-foreground">Error: {error}</p>} {/* এখানে এররের জন্য লাল রঙ ঠিক আছে */}
             {!isLoading && !error && recipes.length === 0 && (
-              <p className="text-center text-lg text-gray-500">Add some ingredients and click <b>Generate Recipe</b> to start.</p>
+              <p className="text-center text-lg text-foreground">Add some ingredients and click <b>Generate Recipe</b> to start.</p> // text-foreground
             )}
             {!isLoading && !error && recipes.length > 0 && <RecipeDisplay recipes={recipes} />}
           </div>

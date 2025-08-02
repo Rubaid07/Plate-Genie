@@ -4,9 +4,9 @@ import Link from 'next/link';
 
 const Navbar = () => {
   return (
-    <nav className="bg-gray-800 text-white p-4 shadow-md">
-      <div className="container mx-auto">
-        <Link href="/" className="text-2xl font-bold hover:text-green-400 transition-colors">
+    <nav className="bg-card text-foreground p-4 shadow-md">
+      <div className="container mx-auto max-w-7xl">
+        <Link href="/" className="text-2xl font-bold hover:text-primary transition-colors">
           PlateGenie
         </Link>
       </div>

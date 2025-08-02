@@ -41,34 +41,34 @@ const RegisterForm = () => {
     };
 
     return (
-        <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-md shadow-md">
-            <h2 className="text-2xl font-bold mb-4 text-center">Create an Account</h2>
+        <div className="max-w-md mx-auto mt-10 p-6 bg-card rounded-md shadow-md">
+            <h2 className="text-2xl font-bold mb-4 text-center text-foreground">Create an Account</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                    <label className="block text-sm font-medium text-gray-700">Username</label>
+                    <label className="block text-sm font-medium text-foreground">Username</label>
                     <input
                         type="text"
-                        className="mt-1 p-2 w-full border rounded-md"
+                        className="mt-1 p-2 w-full border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
                     />
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700">Email</label>
+                    <label className="block text-sm font-medium text-foreground">Email</label>
                     <input
                         type="email"
-                        className="mt-1 p-2 w-full border rounded-md"
+                        className="mt-1 p-2 w-full border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700">Password</label>
+                    <label className="block text-sm font-medium text-foreground">Password</label>
                     <input
                         type="password"
-                        className="mt-1 p-2 w-full border rounded-md"
+                        className="mt-1 p-2 w-full border border-border rounded-md bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
@@ -76,13 +76,13 @@ const RegisterForm = () => {
                 </div>
                 <button
                     type="submit"
-                    className="w-full bg-green-500 text-white p-2 rounded-md font-bold hover:bg-green-600 disabled:opacity-50"
+                    className="w-full bg-primary p-2 rounded-md font-bold hover:bg-primary-dark disabled:opacity-50 transition-colors"
                     disabled={loading}
                 >
                     {loading ? 'Registering...' : 'Register'}
                 </button>
             </form>
-            {message && <p className={`mt-4 text-center ${message.includes('success') ? 'text-green-500' : 'text-red-500'}`}>{message}</p>}
+            {message && <p className={`mt-4 text-center ${message.includes('success') ? 'text-primary' : 'text-red-500'}`}>{message}</p>}
         </div>
     );
 };
