@@ -1,16 +1,10 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/Navbar";
+import { AuthProvider } from './providers/AuthContext';
+import Navbar from './components/Navbar';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Plate Genie",
@@ -18,15 +12,17 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased` }
-      >
-        <Navbar /> 
-        <main className="container mx-auto mt-4 p-4">
-          {children}
-        </main>
+      <body className={inter.className}>
+        <GoogleOAuthProvider clientId={googleClientId}>
+          <AuthProvider>
+            <Navbar />
+            {children}
+          </AuthProvider>
+        </GoogleOAuthProvider>
       </body>
     </html>
   );

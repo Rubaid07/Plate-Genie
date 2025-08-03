@@ -8,12 +8,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: 'var(--primary)',
-        'primary-dark': 'var(--primary-dark)',
-        background: 'var(--background)',
-        foreground: 'var(--foreground-text)',
-        card: 'var(--card-bg)',
-        border: 'var(--border)',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        card: 'hsl(var(--card))',
+        border: 'hsl(var(--border))',
+        primary: 'hsl(var(--primary))',
+        'primary-dark': 'hsl(var(--primary-dark))',
       },
     },
   },

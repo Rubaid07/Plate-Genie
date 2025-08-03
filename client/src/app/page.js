@@ -1,17 +1,16 @@
-// src/app/page.js
-
 "use client";
 
 import { useState } from 'react';
 import Items from './components/Items';
 import RecipeDisplay from './components/RecipeDisplay';
-import RegisterForm from './components/RegisterForm';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const [recipes, setRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(true); 
+
+  const router = useRouter();
 
   const generateRecipes = async (ingredients) => {
     setIsLoading(true);
@@ -42,24 +41,18 @@ export default function Home() {
   };
 
   return (
-    <>
-      {isLoggedIn ? (
-        <div className="flex flex-col md:flex-row gap-8 p-4">
-          <div className="md:w-1/3">
-            <Items onGenerate={generateRecipes} />
-          </div>
-          <div className="md:w-2/3">
-            {isLoading && <p className="text-center text-lg text-foreground">Generating recipes...</p>} {/* text-foreground */}
-            {error && <p className="text-center text-red-500 text-lg text-foreground">Error: {error}</p>} {/* এখানে এররের জন্য লাল রঙ ঠিক আছে */}
-            {!isLoading && !error && recipes.length === 0 && (
-              <p className="text-center text-lg text-foreground">Add some ingredients and click <b>Generate Recipe</b> to start.</p> // text-foreground
-            )}
-            {!isLoading && !error && recipes.length > 0 && <RecipeDisplay recipes={recipes} />}
-          </div>
-        </div>
-      ) : (
-        <RegisterForm />
-      )}
-    </>
+    <div className="flex flex-col md:flex-row gap-8 p-4">
+      <div className="md:w-1/3">
+        <Items onGenerate={generateRecipes} />
+      </div>
+      <div className="md:w-2/3">
+        {isLoading && <p className="text-center text-lg text-foreground">Generating recipes...</p>}
+        {error && <p className="text-center text-red-500 text-lg text-foreground">Error: {error}</p>}
+        {!isLoading && !error && recipes.length === 0 && (
+          <p className="text-center text-lg text-foreground">Add some ingredients and click <b>Generate Recipe</b> to start.</p>
+        )}
+        {!isLoading && !error && recipes.length > 0 && <RecipeDisplay recipes={recipes} />}
+      </div>
+    </div>
   );
 }
