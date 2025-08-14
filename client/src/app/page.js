@@ -1,3 +1,4 @@
+// src/app/page.js
 "use client";
 
 import FeaturedRecipes from "./components/FeaturedRecipes";
@@ -8,7 +9,7 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      {/* <FeaturedRecipes /> */}
+      <FeaturedRecipes />
     </main>
   );
 }
