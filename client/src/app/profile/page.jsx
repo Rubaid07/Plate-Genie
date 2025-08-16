@@ -35,14 +35,14 @@ export default function ProfilePage() {
 
   return (
     <div className="container mx-auto lg:flex lg:justify-around min-h-[calc(100vh-64px)] md:my-8">
-      {/* Fixed Profile Sidebar */}
+      {/* fixed profile sidebar */}
       <div className="hidden lg:block w-96 flex-shrink-0">
         <div className="sticky top-24 h-max overflow-y-auto">
           <ProfileHeader user={user} onProfileUpdate={login} />
         </div>
       </div>
 
-      {/* Mobile Profile Header */}
+      {/* mobile profile header */}
       <div className="lg:hidden w-full">
         <ProfileHeader user={user} onProfileUpdate={login} />
       </div>

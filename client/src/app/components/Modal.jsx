@@ -61,7 +61,7 @@ const Modal = ({ isOpen, onClose, children, title }) => {
         }`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="sticky top-0 z-10 bg-white border-b border-gray-100 px-6 py-4 sm:px-8 sm:py-6">
+        <div className="sticky top-0 z-10 bg-white border-b border-gray-100 px-3 py-4 sm:px-8 sm:py-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 bg-gradient-to-r from-green-100 to-emerald-100 rounded-lg flex items-center justify-center">
@@ -71,7 +71,7 @@ const Modal = ({ isOpen, onClose, children, title }) => {
             </div>
             <button
               onClick={handleClose}
-              className="group p-2 rounded-xl hover:bg-gray-100 transition-all duration-200 hover:scale-110"
+              className="group p-2 rounded-xl hover:bg-gray-100 transition-all duration-200 hover:scale-110 cursor-pointer"
               aria-label="Close modal"
             >
               <X size={24} className="text-gray-500 group-hover:text-gray-700 group-hover:rotate-90 transition-all duration-200" />
@@ -80,7 +80,7 @@ const Modal = ({ isOpen, onClose, children, title }) => {
         </div>
 
         <div className="overflow-y-auto max-h-[calc(95vh-120px)] custom-scrollbar">
-          <div className="p-6 sm:p-8">{children}</div>
+          <div className="p-3 sm:p-8">{children}</div>
         </div>
       </div>
 
