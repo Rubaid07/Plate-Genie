@@ -11,13 +11,11 @@ const CreateRecipeForm = ({ onRecipeCreated }) => {
   const [content, setContent] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [imagePreview, setImagePreview] = useState(null);
-
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
-
   const [focusedField, setFocusedField] = useState(null);
-
+  
   if (!isLoggedIn && !authLoading && typeof onRecipeCreated === 'undefined') {
     return (
       <div className="text-center py-8">
@@ -28,7 +26,6 @@ const CreateRecipeForm = ({ onRecipeCreated }) => {
       </div>
     );
   }
-
   const handleImageUrlChange = (e) => {
     const url = e.target.value;
     setImageUrl(url);
@@ -38,37 +35,31 @@ const CreateRecipeForm = ({ onRecipeCreated }) => {
       setImagePreview(null);
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setMessage('');
     setIsSuccess(false);
-
     if (!isLoggedIn || !user) {
       setMessage('You must be logged in to create a recipe.');
       setIsLoading(false);
       return;
     }
-
     if (!recipeTitle.trim() || !content.trim()) {
       setMessage('Please fill in both the recipe title and content.');
       setIsLoading(false);
       return;
     }
-
     if (recipeTitle.trim().length < 3) {
       setMessage('Recipe title must be at least 3 characters long.');
       setIsLoading(false);
       return;
     }
-
     if (content.trim().length < 10) {
       setMessage('Recipe content must be at least 10 characters long.');
       setIsLoading(false);
       return;
     }
-
     const recipeData = {
       userId: user.id,
       title: recipeTitle.trim(),
@@ -78,16 +69,13 @@ const CreateRecipeForm = ({ onRecipeCreated }) => {
       comments: [],
       createdAt: new Date(),
     };
-
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(recipeData),
       });
-
       const data = await response.json();
-
       if (response.ok) {
         setMessage('Recipe created successfully! 🎉');
         setIsSuccess(true);
@@ -95,7 +83,6 @@ const CreateRecipeForm = ({ onRecipeCreated }) => {
         setContent('');
         setImageUrl('');
         setImagePreview(null);
-
         if (onRecipeCreated) {
           setTimeout(() => onRecipeCreated(), 1500);
         }
@@ -120,7 +107,6 @@ const CreateRecipeForm = ({ onRecipeCreated }) => {
           </div>
           <p className="text-gray-600">Share your culinary masterpiece with the world</p>
         </div>
-
         {/* Recipe Title */}
         <div className="space-y-2">
           <label
@@ -152,7 +138,6 @@ const CreateRecipeForm = ({ onRecipeCreated }) => {
             </div>
           </div>
         </div>
-
         {/* Recipe Content */}
         <div className="space-y-2">
           <label
@@ -183,7 +168,6 @@ const CreateRecipeForm = ({ onRecipeCreated }) => {
             💡 <span>Tip: Include inggreenients, cooking time, serving size, and step-by-step instructions</span>
           </div>
         </div>
-
         {/* Image URL */}
         <div className="space-y-2">
           <label
@@ -210,7 +194,6 @@ const CreateRecipeForm = ({ onRecipeCreated }) => {
               placeholder="https://example.com/your-delicious-recipe-photo.jpg"
             />
           </div>
-
           {imagePreview && (
             <div className="mt-4 p-3 bg-gray-50 rounded-xl border border-gray-200">
               <p className="text-sm font-medium text-gray-700 mb-2">Preview:</p>
@@ -225,7 +208,6 @@ const CreateRecipeForm = ({ onRecipeCreated }) => {
             </div>
           )}
         </div>
-
         <div className="pt-4">
           <button
             type="submit"
@@ -247,7 +229,6 @@ const CreateRecipeForm = ({ onRecipeCreated }) => {
           </button>
         </div>
       </form>
-
       {message && (
         <div className={`mt-6 p-4 rounded-xl border-2 text-center font-medium transition-all duration-300 ${isSuccess
             ? 'bg-green-50 border-green-200 text-green-700'

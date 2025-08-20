@@ -5,7 +5,7 @@ import { Send, Loader2, Edit2, Trash2, Check } from "lucide-react";
 import { useAuth } from "../../providers/AuthContext";
 import Modal from "../../components/Modal";
 
-const CommentsModal = ({
+const Comments = ({
   recipe,
   isOpen,
   onClose,
@@ -249,4 +249,4 @@ const CommentsModal = ({
   );
 };
 
-export default CommentsModal;
+export default Comments;

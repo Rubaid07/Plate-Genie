@@ -5,10 +5,12 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../providers/AuthContext';
 import ProfileHeader from './components/ProfileHeader';
 import MyRecipesSection from './components/MyRecipesSection';
+import SavedRecipesPage from './components/SavedRecipesPage';
 
 export default function ProfilePage() {
   const { user, isLoggedIn, loading, login } = useAuth();
   const [message, setMessage] = useState({ text: '', type: '' });
+  const [activeTab, setActiveTab] = useState('myRecipes');
 
   useEffect(() => {
     setMessage({ text: '', type: '' });
@@ -34,23 +36,45 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="container mx-auto lg:flex lg:justify-around min-h-[calc(100vh-64px)] md:my-8">
-      {/* fixed profile sidebar */}
-      <div className="hidden lg:block w-96 flex-shrink-0">
-        <div className="sticky top-24 h-max overflow-y-auto">
-          <ProfileHeader user={user} onProfileUpdate={login} />
-        </div>
-      </div>
-
-      {/* mobile profile header */}
-      <div className="lg:hidden w-full">
+    <div className="container mx-auto min-h-[calc(100vh-64px)]">
+      {/* Profile Header (Top) */}
+      <div className="w-full mb-6">
         <ProfileHeader user={user} onProfileUpdate={login} />
       </div>
 
-      <div className="overflow-y-auto ">
-        <div className="max-w-4xl mx-auto">
+      {/* Tabs Navigation */}
+      <div className="border-b border-gray-200">
+        <nav className="flex space-x-8 max-w-4xl mx-auto px-4">
+          <button
+            onClick={() => setActiveTab('myRecipes')}
+            className={`py-4 px-1 font-medium text-sm border-b-2 transition-colors duration-200 ${
+              activeTab === 'myRecipes'
+                ? 'border-emerald-500 text-emerald-600'
+                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+            }`}
+          >
+            My Recipes
+          </button>
+          <button
+            onClick={() => setActiveTab('savedRecipes')}
+            className={`py-4 px-1 font-medium text-sm border-b-2 transition-colors duration-200 ${
+              activeTab === 'savedRecipes'
+                ? 'border-emerald-500 text-emerald-600'
+                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+            }`}
+          >
+            Saved Recipes
+          </button>
+        </nav>
+      </div>
+
+      {/* Tabs Content */}
+      <div className="max-w-4xl mx-auto px-4 py-6">
+        {activeTab === 'myRecipes' ? (
           <MyRecipesSection userId={user?.id} />
-        </div>
+        ) : (
+          <SavedRecipesPage userId={user?.id} />
+        )}
       </div>
     </div>
   );
